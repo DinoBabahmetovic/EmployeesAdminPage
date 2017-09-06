@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} Edit... {% endblock %}
+
+{% block body %}
+	
+	<div class="col-sm-3"></div>
+    <div class="col-sm-6" id="form-div">
+    
+    <h2 class="page-header">Edit employee</h2>
+	{{form_start(form)}}
+	{{form_widget(form)}}
+	{{form_end(form)}}
+
+	</div>
+	<div class="col-sm-3"></div>
+
+{% endblock %}

@@ -1,0 +1,60 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+	
+	<button onclick="topFunction()" id="myBtn" title="Go to top">Top</button>
+	<div class="col-md-12", id="filter-div">
+		<div class="col-md-6">
+			<div>
+			<form>
+		    <input type="text" id="criteria-name" placeholder="Search by name..." class="form-control" onKeyUp="return filterByNameDateFunct()" />
+		    </form>
+			</div>
+		</div>
+		<div class="col-md-6">
+			<div>
+			<form>
+		    <input type="text" id="criteria-date" placeholder="Search by date..." class="form-control input-inline datepicker" data-provide="datepicker" data-date-format="dd-mm-yyyy" onChange="return filterByNameDateFunct()" />
+		    </form>
+			</div>
+		</div>
+	</div>
+	<div class="col-md-12", id="list-div">
+	<h2 class="page-header">Newest Employees</h2>
+
+	<table class="table table-striped"> 
+	<thead> 
+	<tr> 
+	<th>#</th> 
+	<th>Name</th> 
+	<th>Job Position</th> 
+	<th>Start Date</th> 
+	<th>End Date</th>
+	<th></th>
+	</tr>
+	</thead> 
+	<tbody> 
+	{% set counter = 1 %}
+	{% for employee in employees %}
+	<tr class="rowsOfTable"> 
+	<th scope="row">{{counter}}</th> 
+	<td class="fullNamesInTable">{{employee.firstName ~ " " ~ employee.lastName}}</td> 
+	<td>{{employee.jobPosition}}</td> 
+	<td class="startDates">{{employee.startDate|date('F j, Y')}}</td>
+	{% if employee.endDate is null %}
+	<td>-</td>
+	{% else %}
+	<td>{{employee.endDate|date('F j, Y')}}</td> 
+	{% endif %}
+	<td> <a href="/employee/edit/{{employee.id}}" class="btn btn-info btn-md"> <span class="glyphicon glyphicon-pencil"> </span> Edit </a>
+	<a href="/employee/delete/{{employee.id}}" class="btn btn-danger btn-md"> <span class="glyphicon glyphicon-remove"> </span> End </a>
+	</td> 
+	</tr> 
+	{% set counter = counter+1 %}
+	{% endfor %}
+	</tbody> 
+	</table>
+	</div>
+	
+
+{% endblock %}
